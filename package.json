@@ -1,0 +1,44 @@
+{
+	"name": "hovgen-cli",
+	"description": "generate files from templates for hov",
+	"version": "0.0.15",
+	"license": "UNLICENSED",
+	"bin": {
+		"hovgen-cli": "index.js"
+	},
+	"author": {
+		"name": "blobus",
+		"email": "blobus",
+		"url": "blobus"
+	},
+	"keywords": [
+		"hovgen-cli",
+		"blobus"
+	],
+	"files": [
+		"index.js",
+		"utils"
+	],
+	"scripts": {
+		"format": "prettier --write \"./**/*.{js,json}\""
+	},
+	"dependencies": {
+		"chalk": "^4.1.2",
+		"cli-alerts": "^1.2.2",
+		"cli-handle-error": "^4.4.0",
+		"cli-handle-unhandled": "^1.1.1",
+		"cli-meow-help": "^3.1.0",
+		"cli-welcome": "^2.2.2",
+		"hovgen": "^1.0.26",
+		"inquirer": "^8.0.0",
+		"json-to-ts": "^1.7.0",
+		"meow": "^9.0.0",
+		"node-fetch": "^3.2.9",
+		"node-fetch-commonjs": "^3.1.1",
+		"plaiceholder": "^2.4.0",
+		"sharp": "^0.30.7"
+	},
+	"devDependencies": {
+		"prettier": "^2.7.1"
+	}
+}
