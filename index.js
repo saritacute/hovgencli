@@ -6,7 +6,7 @@
  *
  * @author asarita<asarita@hov.co>
  */
-
+const chalk = require('chalk');
 const gen = require('hovgen');
 const init = require('./utils/init');
 const cli = require('./utils/cli');
@@ -20,6 +20,24 @@ const input = cli.input;
 const flags = cli.flags;
 const { clear, debug, generate, convert, save, copy } = flags;
 
+const plaiceholderReturn = ['base64', 'blurhash', 'svg', 'css'];
+
+const blur = input => {
+	const [_, size, type = 'base64'] = input;
+	if (!plaiceholderReturn.includes(type)) {
+		console.log(chalk.red('invalid type'));
+		return;
+	}
+
+	if (size < 4 || size > 64) {
+		console.log(chalk.red('size should be between 0 and 100'));
+		return;
+	}
+
+	const numSize = parseInt(size) || 64;
+	bh2(numSize, type);
+};
+
 (async () => {
 	init({ clear });
 	input.includes(`help`) && cli.showHelp(0);
@@ -28,5 +46,5 @@ const { clear, debug, generate, convert, save, copy } = flags;
 	input.includes(`types`) && convertInit(false);
 	input.includes(`savetypes`) && convertInit(true);
 	input.includes(`files`) && cpy();
-	input.includes(`blurhash`) && bh2();
+	input.includes(`blurhash`) && blur(input);
 })();
