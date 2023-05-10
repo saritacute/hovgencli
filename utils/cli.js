@@ -56,7 +56,10 @@ const commands = {
 	file: { desc: `Get pre-generated files` },
 	types: { desc: `Get types from api endpoint` },
 	savetypes: { desc: `Get types from api endpoint and save it to types.ts` },
-	blurhash: { desc: `Generate blurhash for png,jpg,jpeg files under /public` }
+	blurhash: {
+		desc: `Generate blurhash for png,jpg,jpeg files under /public`
+	},
+	towebp: { desc: `Generate blurhash for png,jpg,jpeg files under /public` }
 };
 
 const helpText = meowHelp({

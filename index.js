@@ -15,6 +15,7 @@ const convertInit = require('./utils/convert');
 const cpy = require('./utils/cpy');
 const bh = require('./utils/helpers/blurhash/bh');
 const bh2 = require('./utils/helpers/blurhash/bh2');
+const towebp = require('./utils/helpers/towebp');
 
 const input = cli.input;
 const flags = cli.flags;
@@ -47,4 +48,5 @@ const blur = input => {
 	input.includes(`savetypes`) && convertInit(true);
 	input.includes(`files`) && cpy();
 	input.includes(`blurhash`) && blur(input);
+	input.includes(`towebp`) && towebp();
 })();

@@ -26,10 +26,11 @@ const start = async (files, size, type) => {
 			const name = crypto.createHash('md5').update(src).digest('hex');
 			await new Promise(res => {
 				sharp(`public/${src}`)
-					.resize({ width: 15 })
+					.resize({ width: 30 })
 					.blur()
 					.webp({
-						quality: 10,
+						lossless: true,
+						quality: 100,
 						effort: 0
 					})
 					.toFile(`public/buffer/${name}.webp`)
@@ -40,11 +41,13 @@ const start = async (files, size, type) => {
 				size
 			});
 
-			fs.unlink(`public/buffer/${name}.webp`, console.log);
+			// fs.unlink(`public/buffer/${name}.webp`, () => {});
 
 			return {
 				img: src,
-				hash: ret[type]
+				hash: ret[type],
+				image: ret.img,
+				test: 'test'
 			};
 		})
 	).then(values => values);
