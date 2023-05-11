@@ -25,16 +25,22 @@ const start = async files => {
 		allPromise.map(async src => {
 			return new Promise(async () => {
 				try {
-					const { size } = await sharp(`public/${src}`)
+					const originalImage = fs.statSync(`public/${src}`);
+					const d = await sharp(`public${src}`)
 						.webp({ effort: 6 })
-						.toFile(
+						.toBuffer();
+					if (Buffer.byteLength(d) > originalImage.size) {
+						console.log(chalk.red(`skipping public${src}`));
+					} else {
+						const { size } = await sharp(d).toFile(
 							`public/${src.substr(0, src.lastIndexOf('.'))}.webp`
 						);
-					console.log(
-						`${src}: ${chalk.red(
-							formatBytes(fs.statSync(`public/${src}`).size)
-						)} -> ${chalk.green(formatBytes(size))}`
-					);
+						console.log(
+							`${src}: ${chalk.red(
+								formatBytes(originalImage.size)
+							)} -> ${chalk.green(formatBytes(size))}`
+						);
+					}
 				} catch (error) {
 					console.log(chalk.red(error));
 				}
