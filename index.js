@@ -39,6 +39,25 @@ const blur = input => {
 	bh2(numSize, type);
 };
 
+const inputTypes = {
+	towebp: ['png', 'jpg', 'jpeg', 'svg']
+};
+
+const filterInput = (type, input) => {
+	const validInputs = inputTypes[type];
+	const [_, ...rest] = input;
+	const invalidParams = [];
+	const isValid = !validInputs
+		.map(input => {
+			const isValidValue = rest.includes(input);
+			if (!isValid) {
+				invalidParams.push(input);
+			}
+			return isValidValue;
+		})
+		.some(res => res === false);
+};
+
 (async () => {
 	init({ clear });
 	input.includes(`help`) && cli.showHelp(0);

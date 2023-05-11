@@ -59,7 +59,9 @@ const commands = {
 	blurhash: {
 		desc: `Generate blurhash for png,jpg,jpeg files under /public`
 	},
-	towebp: { desc: `Generate blurhash for png,jpg,jpeg files under /public` }
+	towebp: {
+		desc: `Generate webp version of png,jpg,jpeg files under /public`
+	}
 };
 
 const helpText = meowHelp({

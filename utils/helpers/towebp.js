@@ -23,19 +23,21 @@ const start = async files => {
 	const allPromise = files.map(dir => dir.replace(/.\/public/i, ''));
 	await Promise.all(
 		allPromise.map(async src => {
-			return new Promise(res => {
-				sharp(`public/${src}`)
-					.webp({ effort: 6 })
-					.toFile(
-						`public/${src.substr(0, src.lastIndexOf('.'))}.webp`
-					)
-					.then(e => {
-						console.log(
-							`${src}: ${chalk.red(
-								formatBytes(fs.statSync(`public/${src}`).size)
-							)} -> ${chalk.green(formatBytes(e.size))}`
+			return new Promise(async () => {
+				try {
+					const { size } = await sharp(`public/${src}`)
+						.webp({ effort: 6 })
+						.toFile(
+							`public/${src.substr(0, src.lastIndexOf('.'))}.webp`
 						);
-					});
+					console.log(
+						`${src}: ${chalk.red(
+							formatBytes(fs.statSync(`public/${src}`).size)
+						)} -> ${chalk.green(formatBytes(size))}`
+					);
+				} catch (error) {
+					console.log(chalk.red(error));
+				}
 			});
 		})
 	);
